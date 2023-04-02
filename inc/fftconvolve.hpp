@@ -7,22 +7,25 @@
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
-#include <boost/python/numpy.hpp>
+#include <cmath>
+#include <complex>
+//#include <boost/python/numpy.hpp>
 
 /// Functions prototypes
 int p(const char *s);
 bool isseparator(char c);
 
-namespace np = boost::python::numpy;
+//namespace np = boost::python::numpy;
 
 /**
  * Convolve performs a convolution on two given sequences.
  */
 class Convolve{
 public:
-    Convolve(np::ndarray F, np::ndarray G);
+//    Convolve(np::ndarray F, np::ndarray G);
     Convolve(char *s1, char *s2);
-    std::vector<int>    conv1d(void);
+    std::vector<int>    conv_1d(void);
+    std::vector<double> fft_1d(void);
 
     class WrongSequenceException : public std::exception {
     public:
@@ -33,6 +36,7 @@ public:
 
 protected:
     std::vector<int>    vectorizeSequence(std::string str);
+    void                fft(std::vector<std::complex<double>>& x, bool inverse);
 
 private:
     /// conv1D Sequences
@@ -40,8 +44,8 @@ private:
     std::vector<int>    g;
 
     /// conv2D Sequences
-    std::vector< std::vector<int> > F;
-    std::vector< std::vector<int> > G;
+//    np::ndarray F;
+//    np::ndarray G;
 };
 
 

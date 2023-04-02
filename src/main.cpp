@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
 
     Convolve convolution(argv[1], argv[2]);
 
-    std::vector<int>    result = convolution.conv1d();
+    std::vector<double>    result = convolution.fft_1d();
 
     return 0;
 }
