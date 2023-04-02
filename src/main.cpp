@@ -10,11 +10,5 @@ int main(int argc, char **argv) {
 
     std::vector<int>    result = convolution.conv1d();
 
-    std::cout << "Output: ";
-    for (auto i: result) {
-        std::cout << i << " ";
-    }
-    std::cout << std::endl;
-
     return 0;
 }
