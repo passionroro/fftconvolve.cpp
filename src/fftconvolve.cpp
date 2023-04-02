@@ -1,17 +1,29 @@
 #include "../inc/fftconvolve.hpp"
 
 /**
- * Convolve default constructor.
+ * Convolve constructor for two-dimensional convolution.
+ * Initialize two 2D arrays of integers.
+ *
+ * @param F: numpy array
+ * @param G: numpy array
+ */
+Convolve::Convolve(np::ndarray F, np::ndarray G) {
+
+}
+
+
+/**
+ * Convolve constructor for one-dimensional convolution.
  * Takes the two strings given in the program parameters.
  *
  * @param s1 f(x): list of numbers (integers)
  * @param s2 g(x): another list of numbers
  */
-Convolve::Convolve(char *s1, char *s2) : _f(), _g() {
+Convolve::Convolve(char *s1, char *s2) : f(), g() {
 
     try {
-        _f = vectorizeSequence(static_cast<std::string>(s1));
-        _g = vectorizeSequence(static_cast<std::string>(s2));
+        f = vectorizeSequence(static_cast<std::string>(s1));
+        g = vectorizeSequence(static_cast<std::string>(s2));
     }
     catch (WrongSequenceException &e) {
         std::cerr << e.what() << std::endl;
@@ -54,8 +66,8 @@ std::vector<int> Convolve::vectorizeSequence(std::string str) {
  */
 std::vector<int> Convolve::conv1d() {
 
-    int f_len = _f.size();
-    int g_len = _g.size();
+    int f_len = f.size();
+    int g_len = g.size();
     int conv_size = f_len + g_len - 1;
 
     std::vector<int> C(conv_size);
@@ -67,7 +79,7 @@ std::vector<int> Convolve::conv1d() {
         int stop = (i < f_len - 1) ? i : f_len - 1;
 
         for (int j = start; j <= stop; j++) {
-            C[i] += _f[j] * _g[i - j];
+            C[i] += f[j] * g[i - j];
         }
 
     }
